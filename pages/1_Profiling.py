@@ -27,9 +27,12 @@ if st.button("Show Profiling"):
 if st.button("Download report"):
     df = st.session_state.uploaded_dataset
     profile_df = df.profile_report()
-    profile_df.to_file("pages/Profile_report.html")
+    profile_html = st_profile_report(profile_df)
+    file_path = "Profile_report.html"
+    profile_html.to_file(file_path)
+    st.session_state["download_file_path"] = file_path
     st.success("Report download link generated successfully")
-
-# Add a download link to the saved file
-st.markdown("[Download Profile Report](pages/Profile_report.html)")
+    if "download_file_path" in st.session_state:
+        file_path = st.session_state["download_file_path"]
+        st.markdown(f'<a href="{file_path}" download>Download Profile Report</a>', unsafe_allow_html=True)
 
