@@ -1,17 +1,13 @@
 import streamlit as st
-import plotly.express as px
 from pycaret.classification import setup, compare_models, pull, save_model, load_model
 import pandas as pd
-import os
-from datetime import time
 import joblib
-
 if st.session_state.uploaded_dataset is not None:
     df = st.session_state.uploaded_dataset
 else:
     pass
 df = st.session_state.uploaded_dataset
-st.title("Classification Modelling for Categorical Target Variables")
+st.title("Regression Modelling for Numerical Target Variables")
 with st.sidebar:
     st.image("reg.png")
     st.title("TANGY MODELLER")
@@ -30,6 +26,7 @@ else:
     chosen_target = st.selectbox('Choose the Target Column', categorical_columns)
     st.dataframe(df)
 @st.cache_data
+
 def run_model_comparison(df, chosen_target):
     setup(df, target=chosen_target)
     setup_df = pull()
@@ -51,13 +48,16 @@ def run_model_comparison(df, chosen_target):
     best_model = compare_models()
     compare_df = pull()
     st.dataframe(compare_df)
-    # joblib.dump(best_model)
-    # Provide a download link to the user
-    st.markdown("## Download Best Model")
-    model_bytes = joblib.dump(best_model)
-    st.download_button("Download Best Model", data=model_bytes, file_name="best_model.pkl")
-    
-# Code to pull best model
+    model_path = "best_model.pkl"
+    joblib.dump(best_model, model_path)
+    st.session_state.dataset = model_path
+# Provide a download link to the user
+    if "dataset" in st.session_state and st.session_state.dataset is not None:
+        st.markdown("## Download Best Model")
+        model_bytes = joblib.dump(st.session_state.dataset, "best_model.pkl")
+        st.download_button("Download Best Model", data=model_bytes, file_name="best_model.pkl")
+
+# Code to use to pull best model
 code = """
 def add_numbers(a, b):
     return a + b
@@ -68,5 +68,3 @@ st.code(code, language='python')
 # Run model comparison with progress bar
 if st.button('Run Model Comparison'):
     run_model_comparison(df, chosen_target)
-
-    
