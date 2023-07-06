@@ -22,7 +22,7 @@ if choice == "Upload":
 
     if uploaded_dataset is not None:
         df_total = pd.read_csv(uploaded_dataset, index_col=None)
-        train_data, test_data = train_test_split(df_total, test_size=0.6, random_state=42)
+        train_data, test_data = train_test_split(df_total, test_size=0.7, random_state=42)
         df = train_data
         st.session_state.uploaded_dataset = df
         st.dataframe(df)
