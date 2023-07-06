@@ -1,0 +1,11 @@
+pycaret[full]
+streamlit
+pandas
+numpy
+y_data profiling
+pandas_profiling
+streamlit_pandas_profiling
+sklearn
+joblib
+plotly.express
+base64
