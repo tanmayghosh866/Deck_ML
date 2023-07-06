@@ -7,7 +7,7 @@ if st.session_state.uploaded_dataset is not None:
 else:
     pass
 df = st.session_state.uploaded_dataset
-st.title("Regression Modelling for Numerical Target Variables")
+st.title("Classification Modelling for Categorical Target Variables")
 with st.sidebar:
     st.image("reg.png")
     st.title("TANGY MODELLER")
