@@ -6,4 +6,3 @@ ydata_profiling
 streamlit_pandas_profiling
 scikit-learn
 joblib
-base64
