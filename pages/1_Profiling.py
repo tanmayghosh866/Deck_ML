@@ -29,7 +29,7 @@ if st.button("Download report"):
     df = st.session_state.uploaded_dataset
     profile_df = df.profile_report()
     buffer = BytesIO()
-    profile_df.to_file(buffer, output_format="html")
+    profile_df.to_file(output_file=buffer)
     
     # Create download link
     st.download_button(
