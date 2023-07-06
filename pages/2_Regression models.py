@@ -29,7 +29,6 @@ else:
 @st.cache_data
 
 def run_model_comparison(df, chosen_target):
-    df['Age'] = df['Age'].fillna(df['Age'].mean())
     setup(df, target=chosen_target)
     setup_df = pull()
     # Get the list of available models - hardcoded
@@ -50,11 +49,16 @@ def run_model_comparison(df, chosen_target):
     best_model = compare_models()
     compare_df = pull()
     st.dataframe(compare_df)
-    #joblib.dump(best_model)
-    # Provide a download link to the user
+    model_path = "best_model.pkl"
+    joblib.dump(best_model, model_path)
+    st.session_state.dataset = model_path
+
+# Provide a download link to the user
+if "dataset" in st.session_state and st.session_state.dataset is not None:
     st.markdown("## Download Best Model")
-    model_bytes = joblib.dump(best_model,"best_model.pkl")
+    model_bytes = joblib.dump(st.session_state.dataset, "best_model.pkl")
     st.download_button("Download Best Model", data=model_bytes, file_name="best_model.pkl")
+
 # Code to use to pull best model
 code = """
 def add_numbers(a, b):
