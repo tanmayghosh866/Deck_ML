@@ -29,7 +29,7 @@ if st.button("Download report"):
     profile_df = df.profile_report()
     profile_html = st_profile_report(profile_df)
     file_path = "Profile_report.html"
-    profile_html.to_file(file_path)
+    profile_df.to_file(file_path)
     st.session_state["download_file_path"] = file_path
     st.success("Report download link generated successfully")
     if "download_file_path" in st.session_state:
