@@ -53,10 +53,10 @@ def run_model_comparison(df, chosen_target):
     st.session_state.dataset = model_path
 
 # Provide a download link to the user
-if "dataset" in st.session_state and st.session_state.dataset is not None:
-    st.markdown("## Download Best Model")
-    model_bytes = joblib.dump(st.session_state.dataset, "best_model.pkl")
-    st.download_button("Download Best Model", data=model_bytes, file_name="best_model.pkl")
+    if "dataset" in st.session_state and st.session_state.dataset is not None:
+        st.markdown("## Download Best Model")
+        model_bytes = joblib.dump(st.session_state.dataset, "best_model.pkl")
+        st.download_button("Download Best Model", data=model_bytes, file_name="best_model.pkl")
 
 # Code to use to pull best model
 code = """
