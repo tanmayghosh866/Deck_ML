@@ -3,6 +3,7 @@ from ydata_profiling import profile_report
 import pandas as pd
 import base64
 from streamlit_pandas_profiling import st_profile_report
+from io import BytesIO
 
 if st.session_state.uploaded_dataset is not None:
     df = st.session_state.uploaded_dataset
@@ -27,12 +28,14 @@ if st.button("Show Profiling"):
 if st.button("Download report"):
     df = st.session_state.uploaded_dataset
     profile_df = df.profile_report()
-    profile_html = st_profile_report(profile_df)
-    file_path = "Profile_report.html"
-    profile_df.to_file(file_path)
-    st.session_state["download_file_path"] = file_path
-    st.success("Report download link generated successfully")
-    if "download_file_path" in st.session_state:
-        file_path = st.session_state["download_file_path"]
-        st.markdown(f'<a href="{file_path}" download>Download Profile Report</a>', unsafe_allow_html=True)
+    buffer = BytesIO()
+    profile_df.to_file(buffer, output_format="html")
+    
+    # Create download link
+    st.download_button(
+        label="Download Profile Report",
+        data=buffer.getvalue(),
+        file_name="Profile_report.html",
+        mime="text/html"
+    )
 
