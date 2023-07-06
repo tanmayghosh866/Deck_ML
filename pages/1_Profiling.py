@@ -28,14 +28,7 @@ if st.button("Show Profiling"):
 if st.button("Download report"):
     df = st.session_state.uploaded_dataset
     profile_df = df.profile_report()
-    buffer = BytesIO()
-    profile_df.to_file(output_file=buffer)
-    
-    # Create download link
-    st.download_button(
-        label="Download Profile Report",
-        data=buffer.getvalue(),
-        file_name="Profile_report.html",
-        mime="text/html"
-    )
+    html_report = profile_df.to_html()
+    href = f'data:text/html;base64,{base64.b64encode(html_report.encode()).decode()}'
+    st.markdown(f'<a href="{href}" download>Download Profile Report</a>', unsafe_allow_html=True)
 
