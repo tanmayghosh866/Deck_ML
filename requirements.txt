@@ -2,10 +2,8 @@ pycaret[full]
 streamlit
 pandas
 numpy
-y_data profiling
-pandas_profiling
+ydata_profiling
 streamlit_pandas_profiling
-sklearn
+scikit-learn
 joblib
-plotly.express
 base64
