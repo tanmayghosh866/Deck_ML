@@ -31,4 +31,5 @@ if st.button("Download report"):
     html_report = profile_df.to_html()
     href = f'data:text/html;base64,{base64.b64encode(html_report.encode()).decode()}'
     st.markdown(f'<a href="{href}" download>Download Profile Report</a>', unsafe_allow_html=True)
+st.text("test git bash")
 
