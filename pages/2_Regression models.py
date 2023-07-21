@@ -60,8 +60,9 @@ def run_model_comparison(df, chosen_target):
 
 # Code to use to pull best model
 code = """
-def add_numbers(a, b):
-    return a + b
+def Pull_model():
+    return model.pkl
+    Code will be added here in future for reference
 """
 st.text("Code to Pull downloaded model in Jupyter Notebook")
 st.code(code, language='python')
