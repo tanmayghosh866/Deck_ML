@@ -7,7 +7,7 @@ if st.session_state.uploaded_dataset is not None:
 else:
     pass
 df = st.session_state.uploaded_dataset
-st.title("Classification Modelling for Categorical Target Variables")
+st.title("Regression Modelling for Numerical Target Variables")
 with st.sidebar:
     st.image("reg.png")
     st.title("TANGY MODELLER")
@@ -48,19 +48,14 @@ def run_model_comparison(df, chosen_target):
     best_model = compare_models()
     compare_df = pull()
     st.dataframe(compare_df)
-    model_path = "best_model.pkl"
-    joblib.dump(best_model, model_path)
-    st.session_state.dataset = model_path
-# Provide a download link to the user
-    if "dataset" in st.session_state and st.session_state.dataset is not None:
-        st.markdown("## Download Best Model")
-        model_bytes = joblib.dump(st.session_state.dataset, "best_model.pkl")
-        st.download_button("Download Best Model", data=model_bytes, file_name="best_model.pkl")
+    best_model_info = compare_df.iloc[0]
+    st.text(f"The best model is: {best_model_info}")
 
 # Code to use to pull best model
 code = """
-def add_numbers(a, b):
-    return a + b
+def Pull_model():
+    return model.pkl
+    Code will be added here in future for reference
 """
 st.text("Code to Pull downloaded model in Jupyter Notebook")
 st.code(code, language='python')
