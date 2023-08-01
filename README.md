@@ -1,5 +1,5 @@
 # Deck_ML
-This app is made with streamlit, pycaret and pandass profiling
+This app is made with streamlit, pycaret and pandas profiling
 This app can take your dataset, profile it and download the interactive profile report to  your computer
 Also this app can classify and regress across models in your dataset
 It compare the best model based on MSE, R2, etc.
