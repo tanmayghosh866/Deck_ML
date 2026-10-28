@@ -8,7 +8,6 @@ import streamlit.components.v1 as components
 
 if st.session_state.uploaded_dataset is not None:
     df = st.session_state.uploaded_dataset
-st.text("test text")
 st.header("EDA Profiling for dataset")
 with st.sidebar:
     st.image("Profile_2.png")
@@ -19,13 +18,7 @@ if choice == "Clear":
     if st.button("Clear All Data"):
         st.session_state.uploaded_dataset = None
         st.success("Data removed sucessfully")  
-st.title("Show Graphs - need to code")
-# if st.button("Show Profiling"):
-#         df = st.session_state.uploaded_dataset
-#         st.dataframe(df)
-#         profile_df = df.profile_report()
-#         st_profile_report(profile_df)
-        
+
 if st.button("Show Profiling"):
     df = st.session_state.uploaded_dataset
     st.dataframe(df)  
