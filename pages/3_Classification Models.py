@@ -2,6 +2,13 @@ import streamlit as st
 from pycaret.classification import setup, compare_models, pull, save_model, load_model
 import pandas as pd
 import joblib
+st.set_page_config(
+    page_icon="📊",
+    layout="wide",  # Options: "centered" or "wide"
+    initial_sidebar_state="expanded"  # Optional: "auto", "expanded", "collapsed"
+)
+
+
 if st.session_state.uploaded_dataset is not None:
     df = st.session_state.uploaded_dataset
 else:

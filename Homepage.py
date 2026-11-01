@@ -2,6 +2,13 @@ import streamlit as st
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
+st.set_page_config(
+    page_icon="📊",
+    layout="wide",  # Options: "centered" or "wide"
+    initial_sidebar_state="expanded"  # Optional: "auto", "expanded", "collapsed"
+)
+
+
 app_name = "TANGY MODELLER"
 st.write(f"<h1 style='text-align: center;'>{app_name}</h1>", unsafe_allow_html=True)
 

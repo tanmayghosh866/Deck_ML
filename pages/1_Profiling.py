@@ -6,6 +6,12 @@ import base64
 from io import BytesIO
 import streamlit.components.v1 as components
 
+st.set_page_config(
+    page_icon="📊",
+    layout="wide",  # Options: "centered" or "wide"
+    initial_sidebar_state="expanded"  # Optional: "auto", "expanded", "collapsed"
+)
+
 if st.session_state.uploaded_dataset is not None:
     df = st.session_state.uploaded_dataset
 st.header("EDA Profiling for dataset")
