@@ -12,8 +12,15 @@ st.set_page_config(
     initial_sidebar_state="expanded"  # Optional: "auto", "expanded", "collapsed"
 )
 
-if st.session_state.uploaded_dataset is not None:
-    df = st.session_state.uploaded_dataset
+try:
+    if st.session_state["df_manipulated"] is not None:
+        df = st.session_state["df_manipulated"]
+    else:
+        df = None
+except Exception as e:
+        st.warning(f"Error loading dataset: Please load the dataset through the Homepage")
+
+
 st.header("EDA Profiling for dataset")
 with st.sidebar:
     st.image("Profile_2.png")
@@ -26,7 +33,7 @@ if choice == "Clear":
         st.success("Data removed sucessfully")  
 
 if st.button("Show Profiling"):
-    df = st.session_state.uploaded_dataset
+    df = st.session_state["df_manipulated"]
     st.dataframe(df)  
     with st.spinner("Generating profiling report..."):
         # 1. Generate the ydata-profiling report object
@@ -35,7 +42,7 @@ if st.button("Show Profiling"):
         components.html(profile_html, height=800, scrolling=True)
 
 if st.button("Download report"):
-    df = st.session_state.uploaded_dataset
+    df = st.session_state["df_manipulated"]
     profile_df = ProfileReport(df, title="Dataset Profile Report", explorative=True)
     html_report = profile_df.to_html()
     href = f'data:text/html;base64,{base64.b64encode(html_report.encode()).decode()}'
